@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/recommender/db" VERSION="20110805" COMMENT="XMLDB file for recommender block"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="block_recommender_data" COMMENT="Required to store any custom data for specific services within recommender block">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="service"/>
+        <FIELD NAME="service" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="service for which the data relates" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="user editing the row" PREVIOUS="service" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="course data is added for" PREVIOUS="userid" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="time the data was added/updated" PREVIOUS="courseid" NEXT="deleted"/>
+        <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="whether data has been deleted" PREVIOUS="timemodified" NEXT="customfield1"/>
+        <FIELD NAME="customfield1" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="optional data store for the service" PREVIOUS="deleted" NEXT="customfield2"/>
+        <FIELD NAME="customfield2" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="optional data store for the service" PREVIOUS="customfield1" NEXT="customfield3"/>
+        <FIELD NAME="customfield3" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="optional data store for the service" PREVIOUS="customfield2" NEXT="customfield4"/>
+        <FIELD NAME="customfield4" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="optional data store for the service" PREVIOUS="customfield3"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid" NEXT="service-courseid"/>
+        <INDEX NAME="service-courseid" UNIQUE="false" FIELDS="service, courseid" PREVIOUS="courseid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
