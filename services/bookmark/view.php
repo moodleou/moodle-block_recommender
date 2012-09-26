@@ -83,5 +83,6 @@ $PAGE->requires->js_init_call('M.block_recommender_service_bookmark.init_dragdro
      array(array('courseid'=>$courseid)), false, $jsmodule);
 
 echo $OUTPUT->header();
+echo $OUTPUT->heading(get_string('bookmark_servicetitle', 'block_recommender'));
 echo $renderer->display_more_details($service, $moving);
 echo $OUTPUT->footer();

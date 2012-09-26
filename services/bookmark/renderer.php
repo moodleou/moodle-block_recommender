@@ -71,7 +71,6 @@ class block_recommender_service_bookmark_renderer extends plugin_renderer_base {
 
         $display = '';
 
-        $display .= html_writer::tag('h1', get_string('bookmark_more_title', 'block_recommender'));
         $display .= html_writer::start_tag('div',
             array('class' => 'block_recommender_service_bookmark_area'));
 
@@ -83,10 +82,10 @@ class block_recommender_service_bookmark_renderer extends plugin_renderer_base {
             $links = $service->get_all_links($categoryid);
 
             if (count($links)) {
-            // Add the start tag
-            $display .= html_writer::start_tag('ul', array(
-                'class' => 'block_recommender_service_bookmark_list',
-                'id' => 'bookmark_categoryid-'.$categoryid));
+                // Add the start tag
+                $display .= html_writer::start_tag('ul', array(
+                    'class' => 'block_recommender_service_bookmark_list',
+                    'id' => 'bookmark_categoryid-'.$categoryid));
             }
 
             if ($moving && $categoryid == null) {
@@ -158,7 +157,7 @@ class block_recommender_service_bookmark_renderer extends plugin_renderer_base {
                 }
             }
             if (count($links)) {
-            $display .= html_writer::end_tag('ul');
+                $display .= html_writer::end_tag('ul');
             }
         }
 

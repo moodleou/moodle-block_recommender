@@ -2,7 +2,9 @@
 .block_recommender .block_tree {margin:5px;padding-left:0px;overflow:visible;}
 .block_recommender .block_tree li {margin:3px;list-style: none;padding:0;}
 .block_recommender .block_tree li.item_with_icon > p {position:relative;}
-.block_recommender .block_tree li.item_with_icon > p img {vertical-align:middle;position:absolute;left:0;top:3px}
+.block_recommender .block_tree li.item_with_icon > p img {vertical-align:middle;position:absolute;left:-1px;top:3px}
+.block_recommender .block_tree li a {text-decoration:none;}
+.block_recommender .block_tree li a:hover {text-decoration:underline;}
 
 .block_recommender .block_tree li ul {padding-left:0;margin:0;}
 .block_recommender .block_tree li.depth_2 ul {padding-left:16px;margin:0;}
@@ -50,3 +52,19 @@
 /** Bookmark service **/
 .block_recommender_service_bookmark_area .block_recommender_service_bookmark_list {min-height: 1em;}
 .block_recommender_service_bookmark_area .block_recommender_service_bookmark_list .bookmark_handle {cursor:move;}
+
+/** Activity service **/
+#page-blocks-recommender-services-activity-view .thleft {
+    text-align: left;
+}
+#page-blocks-recommender-services-activity-view .instancename {
+    padding-left: 5px;
+}
+
+#page-blocks-recommender-services-activity-view .headerwithhelp {
+    display:inline;
+    padding-right: 5px;
+}
+.ie .recommender_apply {
+    margin-left: 215px;
+}

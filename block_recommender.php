@@ -36,16 +36,7 @@ class block_recommender extends block_base {
         global $OUTPUT;
 
         $this->title = get_string('recommendertitle', 'block_recommender');
-        $this->title.= $OUTPUT->help_icon('recommendertitle', 'block_recommender');
-    }
-
-    /**
-     * The applicable formats for the block
-     *
-     * @return  array       An array of the applicable formats for the block
-     */
-    public function applicable_formats() {
-        return array('course' => true);
+        $this->title.= ' ' . $OUTPUT->help_icon('recommendertitle', 'block_recommender');
     }
 
     /**

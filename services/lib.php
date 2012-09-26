@@ -112,7 +112,7 @@ abstract class block_recommender_service {
 
         if ($this->displaymorelink && $this->has_service_capability('more')) {
             $more = new stdClass();
-            $more->title = get_string('more', 'block_recommender');
+            $more->title = get_string($this->get_service_name().'_more', 'block_recommender');
             $more->url = new moodle_url(
                 '/blocks/recommender/services/'.$this->get_service_name().'/view.php',
                 array('courseid' => $this->course->id));
@@ -182,6 +182,7 @@ class block_recommender_service_config {
 
     public function __construct($servicename, $config) {
 
+        $this->config = new stdClass();
         foreach ((array)$config as $key => $value) {
             if (preg_match("/^$servicename\_/", $key)) {
                 $key = preg_replace("/^$servicename\_/", '', $key);

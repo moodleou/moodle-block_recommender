@@ -25,12 +25,13 @@
 
 require_once(dirname(__FILE__) . '/../../../../config.php');
 require_once(dirname(__FILE__) . '/lib.php');
-require_once(dirname(__FILE__) . '/renderer.php');
+require_once(dirname(__FILE__) . '/display_form.php');
 
 // Determine the course and other params
 $courseid   = required_param('courseid',  PARAM_INT);
 $daterange  = optional_param('daterange', null, PARAM_RAW);
 $selectedactivity = optional_param('activity',  -1, PARAM_INT);
+$sort = optional_param('sort', 'views_most', PARAM_ALPHAEXT);
 
 // Require login
 require_login($courseid, false);
@@ -75,10 +76,11 @@ $PAGE->navbar->add($title, $PAGE->url);
 
 // Output the header before displaying the filter section
 echo $OUTPUT->header();
+echo $OUTPUT->heading(get_string('activity_servicetitle', 'block_recommender'));
 
-// Display the filter selector
-$renderer = $PAGE->get_renderer('block_recommender_service_activity');
-echo $renderer->display_filter($PAGE->url, $daterange, $selectedactivity);
+$mform = new block_recommender_activity_display_form();
+$mform->set_data($pageparams);
+$mform->display();
 
 // Build the table
 $service = new block_recommender_service_activity($PAGE->course);
@@ -91,45 +93,32 @@ $headers = array();
 $headers[] = get_string('activity_items', 'block_recommender');
 $headers[] = get_string('activity_views', 'block_recommender');
 $headers[] = get_string('activity_participations', 'block_recommender');
-
 $table->define_columns(array('module', 'views', 'participations'));
+$table->column_class('module', 'thleft');
 $table->define_headers($headers);
-
-// All columns should be sortable. Don't set a default
-$table->sortable(true, 'views', SORT_DESC);
 
 // Run the table setup
 $table->setup();
 
 // Calculate sorting
-$sortby = $table->get_sort_for_table('activity_course_' . $PAGE->course->id);
+$sortarray = explode('_', $sort);
+if ($sortarray[1] == 'least') {
+    $sortdirection = 'ASC';
+} else {
+    $sortdirection = 'DESC';
+}
+$sortby = $sortarray[0] . ' ' . $sortdirection;
 
 // Retrieve the links
 $links = $service->get_popular_activities(SERVICE_POPULARACTIVITIES_MORE_LIMIT,
     $withinperiod, $activity, $sortby);
 
-// Most sorting can be performed in the database, but module name cannot
-// because of the way that it is stored in moodle
-if (($sortorder = preg_replace('/^module (ASC|DESC).*/', '$1', $sortby))
-    && ($sortby != $sortorder)) {
-    $names = array_map(create_function('$a', 'return strtolower($a->title);'), $links);
-    switch ($sortorder) {
-        case('ASC'):
-            $sortorder = SORT_ASC;
-            break;
-        case('DESC'):
-        default:
-            $sortorder = SORT_DESC;
-    }
-    array_multisort($names, $sortorder, SORT_STRING, $links);
-}
-
 // Add all of the links to the data
 foreach ($links as $link) {
     $row = array();
-    $icon = html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('icon', $link->module),
+    $icon = html_writer::empty_tag('img', array('src' => $link->icon_url,
                                                 'class' => 'activityicon',
-                                                'alt' => get_string('pluginname', $link->module)));
+                                                'alt' => get_string('modulename', $link->module)));
     $title = html_writer::tag('span', $link->title, array('class' => 'instancename'));
     $row['module'] = html_writer::link($link->url, $icon . $title);
     $row['views'] = $link->views;

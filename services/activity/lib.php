@@ -66,6 +66,7 @@ class block_recommender_service_activity extends block_recommender_service {
         $cms = $info->get_cms();
 
         // Only return visible cms
+        $names = array(); //a list of module instance names for use if sorting by module
         foreach ($cms as $cm) {
             if (!$cm->uservisible) {
                 unset($cms[$cm->id]);
@@ -79,10 +80,32 @@ class block_recommender_service_activity extends block_recommender_service {
                     unset($cms[$cm->id]);
                 }
             }
+            if (isset($cms[$cm->id])) {
+                array_push($names, strtolower($cm->name));
+            }
         }
 
         if ($since === null) {
             $since = $this->get_last_access();
+        }
+
+        // Limit cms if ordering by module name
+        if (!empty($sortby) && strpos($sortby, 'module') !== false && count($names) > 1) {
+            if (strpos($sortby, 'DESC')) {
+                $sortorder = 'DESC';
+                rsort($names, SORT_STRING);
+            } else {
+                $sortorder = 'ASC';
+                sort($names, SORT_STRING);
+            }
+            $names = array_slice($names, 0, $limit, true);
+            foreach ($cms as $cm) {
+                if (!in_array(strtolower($cm->name), $names)) {
+                    unset($cms[$cm->id]);
+                }
+            }
+            // Adjust the sortby to avoid having to reorder by module instance name after query
+            $sortby = $this->get_special_sortby($names, $cms, $sortorder);
         }
 
         $topmods = $this->build_sql($cms, $since, $limit, $sortby);
@@ -92,6 +115,7 @@ class block_recommender_service_activity extends block_recommender_service {
             $link =  new stdClass;
             $link->title = $cms[$mod->cmid]->name;
             $link->url   = $cms[$mod->cmid]->get_url();
+            $link->icon_url = $cms[$mod->cmid]->get_icon_url();
             $link->module = $mod->module;
             $link->views = $mod->views;
             $link->participations = $mod->participations;
@@ -99,6 +123,22 @@ class block_recommender_service_activity extends block_recommender_service {
         }
 
         return $activitylinks;
+    }
+
+    /**
+     * Create a special sortby for returning results in module instance name order
+     * @param array $names
+     * @param object $cms
+     * @param string $sortorder
+     * @return string $orderby a snippet of sql for the order by clause
+     */
+    private function get_special_sortby($names, $cms, $sortorder) {
+        $orderby = 'case l.cmid ';
+        foreach ($cms as $cm) {
+            $orderby .= ' when ' . $cm->id . ' then ' . array_search(strtolower($cm->name), $names);
+        }
+        $orderby .= 'else null end ' . $sortorder;
+        return $orderby;
     }
 
     /**
@@ -296,10 +336,9 @@ class block_recommender_service_activity extends block_recommender_service {
 }
 
 class recommender_flexible_table extends flexible_table {
-    function wrap_html_start() {
+    public function wrap_html_start() {
         global $OUTPUT;
-        $title = get_string('activity_sort','block_recommender');
-        $title .= $OUTPUT->help_icon('activity_sort', 'block_recommender');
-        echo html_writer::tag('h2',$title, array('class'=>'main'));
+        $title = get_string('activity_sort', 'block_recommender');
+        echo html_writer::tag('h2', $title, array('class'=>'main headerwithhelp'));
     }
 }

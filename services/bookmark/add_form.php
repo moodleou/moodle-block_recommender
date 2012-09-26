@@ -115,7 +115,6 @@ class bookmark_add_form extends moodleform {
                 'block_recommender', (array) $result);
         }
 
-
         // validate the URL against rfc allow http, https, ftp, but no user section
         if (!validateUrlSyntax($data['url'], 's+H?S?F?u-')) {
             $errors['url'] = get_string('bookmark_urlinvalid', 'block_recommender');

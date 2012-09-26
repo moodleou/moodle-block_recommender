@@ -51,7 +51,6 @@ abstract class block_recommender_service_testlib extends block_recommender_testl
         $class = preg_replace('/^test_/', '', $calledby);
 
         $this->require_course();
-
         $this->expectException(new block_recommender_exception(
             get_string('servicedisabled', 'block_recommender',
             array('servicename' => $servicename))));

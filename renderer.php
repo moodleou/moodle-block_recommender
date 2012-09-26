@@ -126,19 +126,27 @@ class block_recommender_renderer extends plugin_renderer_base {
             // format the content
             if (empty($item->raw)) {
                 $content = $item->title;
-                $attributes = array();
+                // add icon
+                if (isset($item->module)) {
+                    $alt = get_string('modulename', $item->module);
+                    $item->icon = new pix_icon('icon', $alt, $item->module);
+                    $icon = html_writer::empty_tag('img', array('src' => $item->icon_url,
+                            'class' => 'navicon', 'alt' => $alt));
+                } else {
+                    $alt = get_string('pluginname', 'url');
+                    $item->icon = new pix_icon('i/navigationitem', $alt);
+                    $item->icon->attributes['class'] = 'navicon';
+                    $icon = $this->output->render($item->icon);
+                }
+                $content = $icon.$content;
+
+                $attributes = array('title'=>$alt);
                 //add tab support to span but still maintain character stream sequence:
                 $attributes['tabindex'] = '0';
                 $content = html_writer::link($item->url, $content, $attributes);
             } else {
                 $content = $item->raw;
             }
-
-            // add icon
-            $item->icon = new pix_icon('i/navigationitem', 'moodle');
-            $item->icon->attributes['class'] = 'navicon';
-            $icon = $this->output->render($item->icon);
-            $content = $icon.$content;
 
             // add "paragraph" and wrap in "list item"
             $liclasses = array('type_service_itmes', 'depth_3', 'collapsed', 'item_with_icon');
