@@ -52,16 +52,6 @@ $capabilities = array(
         )
     ),
 
-    // view OER
-    'block/recommender:viewoer' => array(
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_COURSE,
-        'archetypes' => array(
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        )
-    ),
-
      // viewactivity
     'block/recommender:viewactivity' => array(
         'captype' => 'read',
