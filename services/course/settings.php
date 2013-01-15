@@ -25,11 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$roles = $DB->get_records_menu('role', null, 'sortorder');
-
-$settings->add(new admin_setting_configselect('block_recommender/course_role',
+$settings->add(new admin_setting_pickroles('block_recommender/course_role',
         get_string('course_role',        'block_recommender'),
-        get_string('course_roledescription',  'block_recommender'), 5, $roles));
+        get_string('course_roledescription',  'block_recommender'), array('student')));
 
 $settings->add(new admin_setting_configtext('block_recommender/course_course_shortname_pattern',
         get_string('course_course_shortname_pattern_title',        'block_recommender'),

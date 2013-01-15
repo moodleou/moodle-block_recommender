@@ -36,21 +36,20 @@ $string['servicedisabled'] = 'The \'{$a->servicename}\' service is currently dis
 $string['recommendertitle_help'] = '<p>This block allows you to look at the most recent activity by
 other users of this website. You can view the most popular resources and activities that have been
 viewed and, if appropriate, participated in within the website.</p>
-<p>If you click on the ‘Popular activities on this website’ link below you will see the top three
+<p>If you click on the ‘Popular activities and resources’ link below you will see the top three
 results (you can click on these titles to take you directly to the resource or activity listed) and
 a ‘more’ link where you can access a page where all the results for this website will be listed.</p>
-<p>You will be able to filter the results by date range, activity type, item title and by the
+<p>You will be able to filter the results by date range, item type, and by the
 number of views and participations.</p>';
 
-// Capabilities
+// Capabilities.
 $string['recommender:addbookmark'] = 'Add item to Bookmarks service';
 $string['recommender:viewbookmark'] = 'View Bookmarks service';
-$string['recommender:viewoer'] = 'View OER Recommender service';
 $string['recommender:viewactivity'] = 'View Popular Activities service';
 $string['recommender:viewcourse'] = 'View Popular Courses service';
 
 
-// Bookmark service
+// Bookmark service.
 $string['bookmark_addbookmark']             = 'Add Bookmark';
 $string['bookmark_bookmarktitle']           = 'Bookmarks';
 $string['bookmark_category']                = 'Category';
@@ -83,7 +82,7 @@ $string['bookmark_urlinuse']                = 'This url is already used for the 
 $string['bookmark_urlinvalid']              = 'This url is invalid';
 $string['bookmark_more'] = 'More bookmarks';
 
-// Popular courses block
+// Popular courses block.
 $string['course_servicetitle'] = 'Popular websites';
 $string['course_course_shortname_pattern_title']        = 'Shortname Regular Expression';
 $string['course_course_shortname_pattern_description']  = 'This regular expression is applied to the course shortname';
@@ -92,25 +91,15 @@ $string['course_course_url_description']    = 'The URL to use if a match is foun
 $string['course_role'] = 'Popular Courses Role';
 $string['course_roledescription'] = 'Which role should be used to assess if a course is popular';
 
-// Open Educational Resources
-$string['oer_disclaimer'] = 'OpenCourseWare links are provided by OER Recommender. The Open University is not responsible for the availability or content of external internet sites.';
-$string['oer_indexed'] = 'Indexed by OER Recommender';
-$string['oer_indexeddescription'] = 'Tick if the site is indexed by OER Recommender service. <a href="http://www.folksemantic.com/feeds/new_oai_rss">Register this site.</a>';
-$string['oer_noresults'] = 'No relevant OER Recommender resources found.';
-$string['oer_servicetitle'] = 'Open Educational Resources';
-$string['oer_xmlloadfailed'] = 'Retrieving OER data failed';
-$string['oer_more'] = 'More OER';
-
-
-// Popular Activities
-$string['activity_filter_activities'] = 'All activities';
-$string['activity_filter_activity'] = 'Activity';
+// Popular Activities.
+$string['activity_filter_activities'] = 'All module activities';
+$string['activity_filter_activity'] = 'Type of item';
 $string['activity_filter_apply'] = 'Apply';
-$string['activity_filter_activity_help'] = '<p>You can filter the results in the table below by controlling the resource and/or activity included.</p> <p>By default all activities and resources will be included within the results table.</p> <p>If you wish to only view resources that have been viewed (these would be files and resource pages) or only activities (these would be for example a forum, wiki, glossary or blog) you can use the drop down list to choose from the following three options:</p> <ol><li>All</li><li>Only resources</li><li>Only activities</li></ol><p>Please note that if your website does not include either of the above types of resource or activity the filter option will not be available.</p> <p>If you navigate away from the page your filter options will return to the default options.</p>';
+$string['activity_filter_activity_help'] = '<p>You can filter the results in the table below by controlling the resource and/or activity included.</p> <p>By default all activities and resources will be included within the results table.</p> <p>If you wish to only view resources that have been viewed (these would be files and resource pages) or only activities (these would be for example a forum, wiki, glossary or blog) you can use the drop down list to choose from the following three options:</p> <ol><li>All</li><li>All module resources</li><li>All module activities</li></ol><p>Please note that if your website does not include either of the above types of resource or activity the filter option will not be available.</p> <p>If you navigate away from the page your filter options will return to the default options.</p>';
 $string['activity_filter_all'] = 'All';
 $string['activity_filter_daterange'] = 'Date range';
 $string['activity_filter_daterange_help'] = '<p>You can filter the results in the table below by controlling the date range over which the activity and/or resource is included.</p> <p>By default the date range is either since the user last visited the website, or since last month; whichever is the most recent date. Therefore, if you visit the website regularly you will see activity based on your last visit; if you do not visit regularly the default will be based on the activity over the last month.</p><p> Use the drop down list to choose from the following four options:</p><ol><li>Since you last visited this website</li><li>Since last month</li><li>Since last week</li><li>Since yesterday</li></ol> <p> Once you have selected the option you require the results will be updated, showing only those results that fall within the date range you have chosen.</p><p> If you navigate away from the page your filter options will return to the default options.</p>';
-$string['activity_filter_resources'] = 'All resources';
+$string['activity_filter_resources'] = 'All module resources';
 $string['activity_filter_sort'] = 'Sort by';
 $string['activity_filter_sort_help'] = '<p>You can sort the results in the table below.</p>
 <p>By default the results are ordered with the most popular activities and resources at the top. These would be the results with the highest number within the ‘Views’ column.</p>
@@ -130,10 +119,10 @@ $string['activity_moduleincluded'] = '{$a->modname} included';
 $string['activity_participateactions'] = 'Participate actions';
 $string['activity_participations'] = 'Participations';
 $string['activity_popularactivitiestitle'] = 'Popular activities';
-$string['activity_servicetitle'] = 'Popular activities on this website';
+$string['activity_servicetitle'] = 'Popular activities and resources';
 $string['activity_viewactions'] = 'View actions';
 $string['activity_views'] = 'Views';
 $string['activity_sort'] = 'Results';
 $string['activity_yesterday'] = 'Since yesterday';
-$string['activity_more'] = 'More popular activities';
-$string['sortby'] = '.  Sort by';  // .  injects pause for screenreader
+$string['activity_more'] = 'More popular items';
+$string['sortby'] = '.  Sort by';  // The .  injects pause for screenreader.
