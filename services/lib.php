@@ -59,14 +59,14 @@ abstract class block_recommender_service {
         }
         $this->course = $course;
 
-        // populate service configuration
+        // Populate service configuration.
         if ($pluginconfig === null) {
             $pluginconfig = get_config('block_recommender');
         }
 
         $this->config = new block_recommender_service_config($servicename, $pluginconfig);
 
-        // Check that this service is enabled
+        // Check that this service is enabled.
         if ($this->config->enabled != 1) {
             throw new block_recommender_exception(
                 get_string('servicedisabled', 'block_recommender',
@@ -163,7 +163,7 @@ abstract class block_recommender_service {
      * doesn't exist.
      */
     public function has_service_capability($capname) {
-        $context = get_context_instance(CONTEXT_COURSE, $this->course->id);
+        $context = context_course::instance($this->course->id);
 
         $capabilityname = 'block/recommender:'.$capname.$this->get_service_name();
 

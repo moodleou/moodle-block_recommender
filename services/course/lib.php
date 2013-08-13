@@ -60,7 +60,7 @@ class block_recommender_service_course extends block_recommender_service {
     public function get_service_content() {
         global $DB;
 
-        // select courses with the most users in common with ours
+        // Select courses with the most users in common with ours.
         $sql = 'SELECT c.id, c.shortname, c.fullname, COUNT(contextid) AS usercount
                 FROM {role_assignments} ra
                 JOIN {context} t ON ra.contextid = t.id
@@ -74,7 +74,7 @@ class block_recommender_service_course extends block_recommender_service {
                 GROUP BY c.id, c.shortname, c.fullname
                 ORDER BY usercount DESC';
 
-        $context = get_context_instance(CONTEXT_COURSE, $this->course->id);
+        $context = context_course::instance($this->course->id);
         $params = array('roleid' => $this->config->role,
                         'roleid2' => $this->config->role,
                         'contextid' => $context->id,
@@ -82,8 +82,7 @@ class block_recommender_service_course extends block_recommender_service {
                         );
 
         $courses = $DB->get_recordset_sql($sql, $params, 0, SERVICE_POPULARCOURSES_BLOCK_LIMIT);
-
-        // populate links
+        // Populate links.
         $courselinks = array();
         foreach ($courses as $c) {
             $link = new stdClass();

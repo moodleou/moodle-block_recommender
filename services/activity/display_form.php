@@ -28,8 +28,9 @@ class block_recommender_activity_display_form extends moodleform {
         global $COURSE;
         $mform =& $this->_form;
         $mform->addElement('hidden', 'courseid', $COURSE->id);
+        $mform->setType('courseid', PARAM_INT);
 
-        // Build the date filter
+        // Build the date filter.
         $dateoptions = array(
             'lastvisit' => get_string('activity_lastvisit', 'block_recommender'),
             'lastmonth' => get_string('activity_lastmonth', 'block_recommender'),
@@ -40,7 +41,7 @@ class block_recommender_activity_display_form extends moodleform {
         $daterange = $mform->addElement('select', 'daterange', $datelabel, $dateoptions);
         $mform->addHelpButton('daterange', 'activity_filter_daterange', 'block_recommender');
 
-        // Build the activity filter
+        // Build the activity filter.
         $activityoptions = array(
             -1 => get_string('activity_filter_all', 'block_recommender'),
             MOD_ARCHETYPE_OTHER => get_string('activity_filter_activities', 'block_recommender'),
@@ -50,7 +51,7 @@ class block_recommender_activity_display_form extends moodleform {
         $activityrange = $mform->addElement('select', 'activity', $activitylabel, $activityoptions);
         $mform->addHelpButton('activity', 'activity_filter_activity', 'block_recommender');
 
-        // Sort filter
+        // Sort filter.
         $sortlabel = get_string('activity_filter_sort', 'block_recommender');
         $sortoptions = array(
             'views_most' => get_string('activity_filter_sort_mostviewed', 'block_recommender'),

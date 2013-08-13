@@ -26,7 +26,7 @@
 define('AJAX_SCRIPT', true);
 
 require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot.'/blocks/recommender/lib.php');
+require_once($CFG->dirroot.'/blocks/recommender/locallib.php');
 require_once($CFG->dirroot.'/blocks/recommender/services/lib.php');
 
 $courseid = required_param('courseid', PARAM_INT);

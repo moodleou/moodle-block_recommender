@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot.'/blocks/recommender/lib.php');
-
 if ($ADMIN->fulltree) {
-    // Display enable/disable settings
+    require_once($CFG->dirroot.'/blocks/recommender/locallib.php');
+
+	// Display enable/disable settings
     $settings->add(new admin_setting_heading('block_recommender_enabledservices',
         get_string('enabledservices', 'block_recommender'), null));
 

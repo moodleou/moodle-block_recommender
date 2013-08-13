@@ -76,7 +76,7 @@ $renderer = $PAGE->get_renderer('block_recommender_service_bookmark');
 $jsmodule = array(
     'name' => 'moodle-block_recommender_service_bookmark-dragdrop',
     'fullpath' => '/blocks/recommender/services/bookmark/yui/dragdrop/dragdrop.js',
-    'requires' => array('base', 'node', 'io', 'dom', 'dd', 'moodle-enrol-notification'),
+    'requires' => array('base', 'node', 'io', 'dom', 'dd', 'moodle-core-notification'),
     'strings' => array(array('move', 'moodle')),
      );
 $PAGE->requires->js_init_call('M.block_recommender_service_bookmark.init_dragdrop',
