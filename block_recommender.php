@@ -23,9 +23,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-global $CFG;
-require_once($CFG->dirroot.'/blocks/recommender/lib.php');
-
 class block_recommender extends block_base {
     /**
      * Block initialisation
@@ -45,11 +42,13 @@ class block_recommender extends block_base {
      * @return   StdClass    containing the block's content
      */
     public function get_content() {
-
         // Save loops if we have the content ready
         if ($this->content !== null) {
             return $this->content;
         }
+
+        global $CFG;
+        require_once($CFG->dirroot.'/blocks/recommender/locallib.php');
         $services = get_recommender_services($this->page->course);
 
         if (empty($services) && $this->page->user_is_editing()) {
@@ -91,6 +90,8 @@ class block_recommender extends block_base {
      * @return   void
      */
     public function get_required_javascript() {
+        global $CFG;
+        require_once($CFG->dirroot.'/blocks/recommender/locallib.php');
         parent::get_required_javascript();
 
         $arguments = array(

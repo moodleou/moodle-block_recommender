@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Recommender block libaries
  *
@@ -25,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/blocks/recommender/services/lib.php');
+require_once(__DIR__.'/services/lib.php');
 
 /**
  * Get all services, create instances of each

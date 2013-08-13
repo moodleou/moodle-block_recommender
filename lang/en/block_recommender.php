@@ -43,6 +43,8 @@ a ‘more’ link where you can access a page where all the results for this web
 number of views and participations.</p>';
 
 // Capabilities.
+$string['recommender:addinstance'] = 'Add a new recommender block';
+$string['recommender:myaddinstance'] = 'Recommended My screen capability';
 $string['recommender:addbookmark'] = 'Add item to Bookmarks service';
 $string['recommender:viewbookmark'] = 'View Bookmarks service';
 $string['recommender:viewactivity'] = 'View Popular Activities service';

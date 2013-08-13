@@ -27,6 +27,25 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
+    'block/recommender:addinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+
+        'block/recommender:myaddinstance' => array(
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_BLOCK,
+                'archetypes' => array(
+                        'user' => CAP_ALLOW
+                ),
+        ),
+
     // view bookmark
     'block/recommender:viewbookmark' => array(
         'captype' => 'read',

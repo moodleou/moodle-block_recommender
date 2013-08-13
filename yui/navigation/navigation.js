@@ -347,4 +347,4 @@ M.block_recommender = M.block_recommender || {
     }
 };
 
-}, '@VERSION@', {requires:['base', 'core_dock', 'io', 'node', 'dom', 'event-custom', 'event-delegate', 'json-parse', 'moodle-enrol-notification']});
+}, '@VERSION@', {requires:['base', 'core_dock', 'io', 'node', 'dom', 'event-custom', 'event-delegate', 'json-parse', 'moodle-core-notification']});
